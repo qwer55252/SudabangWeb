@@ -93,6 +93,11 @@ $(document).ready(function(){
             });
         }
     }
+    function moveToSuccessPage(){
+        var html = "";
+        html += "<button type=\"button\" onclick=\"location.href='/main/successPage' \">다음</button>";
+        $('#nextButton').append(html);
+    }
 
     function sendFileToServer(formData,status)
     {
@@ -123,12 +128,14 @@ $(document).ready(function(){
             data: formData,
             success: function(data){
                 status.setProgress(100);
-
+                // console.log(data);
+                // JSON.parse(data.key);
+                // location.href("localhost:8080/main");
                 //$("#status1").append("File upload Done<br>");
             }
         });
-
         status.setAbort(jqXHR);
+        moveToSuccessPage();
     }
 
 });

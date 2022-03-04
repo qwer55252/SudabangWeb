@@ -1,5 +1,6 @@
 package com.example.sudabangweb.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 @Controller
@@ -55,5 +57,15 @@ public class MainController {
         }
 
         return "success";
+    }
+
+    @GetMapping("/main/successPage")
+    public String success(){
+        return "successPage";
+    }
+
+    @GetMapping("/main/weekTable")
+    public String weekTable(){
+        return "weekTable";
     }
 }
