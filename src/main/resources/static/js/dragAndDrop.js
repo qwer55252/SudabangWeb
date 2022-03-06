@@ -126,12 +126,12 @@ $(document).ready(function(){
             processData: false,
             cache: false,
             data: formData,
-            success: function(data){
+            success: function(msg){
                 status.setProgress(100);
                 // console.log(data);
                 // JSON.parse(data.key);
-                // location.href("localhost:8080/main");
                 //$("#status1").append("File upload Done<br>");
+                // window.location.assign("http://localhost:8080/main/successPage") -> 업로드 성공하는 순간 페이지 이동
             }
         });
         status.setAbort(jqXHR);
