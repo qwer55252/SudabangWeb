@@ -172,12 +172,37 @@ public class MainController {
     }
 
     @GetMapping("/main/weekTable")
-    public String weekTable() throws FileNotFoundException {
-        List<StudentDTO> people = new CsvToBeanBuilder<StudentDTO>(new FileReader("C:/Users/home/Desktop/SudabangWeb/src/main/resources/static/db/StudentDB.csv"))
+    public String weekTable(@RequestParam int month, @RequestParam int week, Model model) throws FileNotFoundException {
+        List<String> name = new ArrayList<String>();
+        List<StudentDTO> print = new ArrayList<StudentDTO>();
+
+        List<StudentDTO> student = new CsvToBeanBuilder<StudentDTO>(new FileReader("C:/Users/home/Desktop/SudabangWeb/src/main/resources/static/db/StudentDB.csv"))
                 .withType(StudentDTO.class)
                 .build()
                 .parse();
-        people.forEach(System.out::println);
+//        student.forEach(System.out::println);
+
+        for(int i=0;i<student.size();i++){
+            if(!name.contains(student.get(i).getName())){
+                name.add(student.get(i).getName());
+            }
+        }
+
+
+        for(int i=0;i<student.size();i++){
+            if(name.get(0).equals(student.get(i).getName())){
+                print.add(student.get(i));
+            }
+        }
+
+        System.out.println(name.get(0));
+
+        model.addAttribute("month",month);
+        model.addAttribute("week",week);
+        model.addAttribute("info",print);
+        model.addAttribute("studentName",name.get(0));
+
+
         return "weekTable";
     }
 
