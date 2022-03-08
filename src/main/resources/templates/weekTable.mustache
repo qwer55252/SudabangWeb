@@ -5,7 +5,7 @@
     <title>Insert title here</title>
 </head>
 <body>
-<table align="center" width="1800" height="50">
+<table align="center" width="2300" height="50">
     <!-- 제목 -->
     <tr bgcolor="white" align="center">
         <p>
@@ -13,20 +13,25 @@
         </p>
     </tr>
 </table>
-<table border="1" frame="void" bordercolor="white" width="1800" height="400" align="center">
-    {{#info}}
+<table border="1" frame="void" bordercolor="white" width="2300" height="400" align="center">
     <!-- 첫 번째 행 (출석) -->
     <tr align="center">
-        <td rowspan="3"
+        <td rowspan={{num}}
             bgcolor="#FFFFCC">출석
         </td>
         <td bgcolor="#FFFFCC">날짜</td>
         <td bgcolor="#FFFFCC">출석시간</td>
 
-        <td rowspan="3" bgcolor="#e2e2e2"># 출석시간 10분 전에..</td>
+        <td align="left" rowspan={{num}} bgcolor="#e2e2e2"><p>
+            # 출석시간 10분 전에 하루도 빠지지 않고<br>
+            출석하는 경우 학생들의 공부를 도와줄<br>
+            선물이 준비되어 있습니다.<br>
+            # 무단지각을 5회이상 하게 되면<br>
+            퇴원 처리 됩니다.
+        </p></td>
 
     </tr>
-
+    {{#info}}
     <tr align="center">
         <td bgcolor="#e2e2e2">{{date}}</td>
         <td bgcolor="#e2e2e2">{{attendance}}</td>
@@ -35,86 +40,118 @@
 </table>
 
 <!-- 두 번째 행(진도) -->
-<table border="1" frame="void" bordercolor="white" width="1800" height="400" align="center">
+<table border="1" frame="void" bordercolor="white" width="2300" height="400" align="center">
     <tr align="center">
-        <td rowspan="11" bgcolor="#CCE5FF">진도</td>
+        <td rowspan={{num}} bgcolor="#CCE5FF">진도</td>
         <td bgcolor="#CCE5FF">날짜</td>
         <td bgcolor="#CCE5FF">교재</td>
-        <td bgcolor="#CCE5FF">내용</td>
-
-        <td rowspan="11" bgcolor="#FFFFCC">과제</td>
-        <td bgcolor="#FFFFCC">날짜</td>
-        <td bgcolor="#FFFFCC">과제</td>
+        <td bgcolor="#CCE5FF">진도</td>
     </tr>
-
+    {{#info}}
+        <tr align="center">
+            <td bgcolor="#e2e2e2">{{date}}</td>
+            <td bgcolor="#e2e2e2">{{textbook}}</td>
+            <td align="left" bgcolor="#e2e2e2">{{{progress}}}</td>
+        </tr>
+    {{/info}}
 </table>
 
 
 <!-- 세 번째 행(수업 집중도) -->
-<table border="1" frame="void" bordercolor="white" width="1800" height="400" align="center">
+<table border="1" frame="void" bordercolor="white" width="2300" height="100" align="center">
     <tr align="center">
-        <td rowspan="4" bgcolor="#ffdab9">수업<br>집중도</td>
-        <td bgcolor="#ffdab9">날짜</td>
-        <td bgcolor="#ffdab9">날짜</td>
-        <td rowspan="4" bgcolor="#e2e2e2"># 수업집중도..</td>
+        <td rowspan={{num}} bgcolor="#ffdab9">수업<br>집중도</td>
+        {{#info}}
+            <td bgcolor="#ffdab9">{{date}}</td>
+        {{/info}}
+        <td align="left" rowspan={{num}} width="300" bgcolor="#e2e2e2"><p>
+            # 수업집중도 1/2/3/4/5<br><br>
+            1 - 수업시간 전반에 걸쳐 집중 못함<br>
+            2 - 수업시간 동안 집중한 시간보다 집중하지 못한 시간이 더 많음<br>
+            3 - 어느 정도 선생님과의 의사소통을 하며 교감함<br>
+            4 - 선생님과의 의사소통이 원활히 되고, 수업에 완전히 집중함<br>
+            5 - 완벽 집중도
+        </p></td>
     </tr>
     <tr align="center">
-        <td rowspan="3" bgcolor="#e2e2e2">5</td>
-        <td rowspan="3" bgcolor="#e2e2e2">-</td>
+        {{#info}}
+            <td bgcolor="#e2e2e2">{{concentration}}</td>
+        {{/info}}
     </tr>
 </table>
 
 <!-- 네 번째 행(과제 수행도) -->
-<table border="1" frame="void" bordercolor="white" width="1800" height="400" align="center">
+<table border="1" frame="void" bordercolor="white" width="2300" height="100" align="center">
     <tr align="center">
-        <td rowspan="4" bgcolor="#ffdab9">수업<br>집중도</td>
-        <td bgcolor="#ffdab9">날짜</td>
-        <td bgcolor="#ffdab9">날짜</td>
-        <td rowspan="4" bgcolor="#e2e2e2"># 과제 수행도..</td>
+        <td rowspan={{num}} bgcolor="#CCCCFF">과제<br>수행도</td>
+        {{#info}}
+            <td bgcolor="#CCCCFF">{{date}}</td>
+        {{/info}}
+        <td align="left" rowspan={{num}} width="300" bgcolor="#e2e2e2"><p>
+            # 과제 수행도 1/2/3/P<br><br>
+            1 - 숙제를 50%미만으로 이행해 옴<br>
+            2 - 숙제 달성률 50~70%<br>
+            3 - 숙제 달성률 70~90%<br>
+            P(Perfect) - 숙제 달성률 90~100% + 오답 완벽 처리
+        </p></td>
     </tr>
     <tr align="center">
-        <td rowspan="3" bgcolor="#e2e2e2">5</td>
-        <td rowspan="3" bgcolor="#e2e2e2">-</td>
+        {{#info}}
+            <td bgcolor="#e2e2e2">{{assignment_performance}}</td>
+        {{/info}}
     </tr>
 </table>
 
 <!-- 다섯 번째 행(플래너 수행도) -->
-<table border="1" frame="void" bordercolor="white" width="1800" height="400" align="center">
+<table border="1" frame="void" bordercolor="white" width="2300" height="100" align="center">
     <tr align="center">
-        <td rowspan="4" bgcolor="#ffdab9">수업<br>집중도</td>
-        <td bgcolor="#ffdab9">날짜</td>
-        <td bgcolor="#ffdab9">날짜</td>
-        <td rowspan="4" bgcolor="#e2e2e2"># 플래너 수행도 A/B/C..</td>
+        <td rowspan={{num}} bgcolor="#FFCCCC">플래너<br>수행도</td>
+        {{#info}}
+            <td bgcolor="#FFCCCC">{{date}}</td>
+        {{/info}}
+        <td align="left" rowspan={{num}} width="300" bgcolor="#e2e2e2"><p>
+            # 플래너 수행도 A/B/C <br><br>
+            A - 자세한 계획을 세우고 이행 정도를 정확히 기입함<br>
+            B - 계획을 세웠으나, 자세하지 않거나 이행정도를 기입하지 않음<br>
+            C - 플래너를 작성하지 않음
+        </p></td>
     </tr>
     <tr align="center">
-        <td rowspan="3" bgcolor="#e2e2e2">5</td>
-        <td rowspan="3" bgcolor="#e2e2e2">-</td>
+        {{#info}}
+            <td bgcolor="#e2e2e2">{{planner_performance}}</td>
+        {{/info}}
     </tr>
 </table>
 
-<table border="1" frame="void" bordercolor="white" width="1800" height="400" align="center">
+<table border="1" frame="void" bordercolor="white" width="2300" height="200" align="center">
     <!-- 여섯 번째 행 (과제) -->
     <tr align="center">
-        <td rowspan="4"
-            bgcolor="#FFFFCC">출석
-        </td>
-        <td bgcolor="#FFFFCC">날짜</td>
-        <td bgcolor="#FFFFCC">출석시간</td>
-
-        <td rowspan="4" bgcolor="#e2e2e2"></td>
-
+        <td rowspan={{num}} bgcolor="#CCE5FF">과제</td>
+        {{#info}}
+            <td bgcolor="#CCE5FF">{{date}}</td>
+        {{/info}}
+        <td rowspan={{num}} bgcolor="#e2e2e2"></td>
+    </tr>
+    <tr align="center">
+        {{#info}}
+            <td align="left" bgcolor="#e2e2e2">{{{assignment_comment}}}</td>
+        {{/info}}
     </tr>
 
 </table>
-<table border="1" frame="void" bordercolor="white" width="1800" height="400" align="center">
+<table border="1" frame="void" bordercolor="white" width="2300" height="100" align="center">
     <!-- 일곱 번째 행 (TEST) -->
     <tr align="center">
-        <td rowspan="4"
-            bgcolor="#FFFFCC">출석
-        </td>
-        <td bgcolor="#FFFFCC">날짜</td>
-        <td bgcolor="#FFFFCC">출석시간</td>
-        <td rowspan="4" bgcolor="#e2e2e2"></td>
+        <td rowspan={{num}} bgcolor="#FFCCCC">TEST</td>
+        {{#info}}
+            <td bgcolor="#FFCCCC">{{date}}</td>
+        {{/info}}
+        <td rowspan={{num}} bgcolor="#e2e2e2"></td>
+    </tr>
+    <tr align="center">
+        {{#info}}
+            <td bgcolor="#e2e2e2">{{test_score}}</td>
+        {{/info}}
     </tr>
 
 </table>

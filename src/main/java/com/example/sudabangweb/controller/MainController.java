@@ -146,6 +146,11 @@ public class MainController {
                                 System.out.print("<" + value + ">");
                             }
                         }
+                        if(value!=null) {
+                            if (value.contains("\n")) {
+                                value = value.replace("\n", "<br>");
+                            }
+                        }
                         value = "\""+value+"\"";
                         if(cellCnt!=13) value+=",";
                         pw.write(value);
@@ -195,13 +200,12 @@ public class MainController {
             }
         }
 
-        System.out.println(name.get(0));
 
         model.addAttribute("month",month);
         model.addAttribute("week",week);
         model.addAttribute("info",print);
         model.addAttribute("studentName",name.get(0));
-
+        model.addAttribute("num",print.size()+1);
 
         return "weekTable";
     }
