@@ -43,7 +43,9 @@ public class MainController {
 
         Iterator<String> itr =  multipartRequest.getFileNames();
 
-        String filePath = "C:/Users/home/Desktop/SudabangWeb/src/main/resources/static/excel";
+        String filePath = "/Users/jeongsangheon/IdeaProjects/SudabangWeb/src/main/resources/static/excel";
+
+        ArrayList<StudentDTO> classData = new ArrayList<>(); // 반 전체 데이터를 담는 객체
 
         while (itr.hasNext()) { //받은 파일들을 모두 돌린다.
 
@@ -62,6 +64,7 @@ public class MainController {
 
 
 
+
             try {
 
                 //파일 저장
@@ -74,7 +77,7 @@ public class MainController {
                 // ----- 엑셀 파일 분석 후 csv로 저장하기 ----- //
 
                 // 저장할 csv 파일 열기
-                File f = new File("C:/Users/home/Desktop/SudabangWeb/src/main/resources/static/db/StudentDB.csv");
+                File f = new File("/Users/jeongsangheon/IdeaProjects/SudabangWeb/src/main/resources/static/db/StudentDB.csv");
                 System.out.println("파일 존재? : "+f.exists());
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f,true), "UTF-8"));
                 //true를 하지 않으면 파일을 덮어씀
@@ -102,6 +105,9 @@ public class MainController {
                 int rowCnt = 0;
                 Iterator<Row> rowIterator = sheet.iterator();
                 while (rowIterator.hasNext()) {
+
+                    StudentDTO studentDto = new StudentDTO(); // 학생 한 줄 데이터를 담는 객체
+
                     Row row = rowIterator.next();
                     if (rowCnt == 0 || rowCnt == 1) {
                         rowCnt++;
@@ -111,8 +117,8 @@ public class MainController {
 
                     // 각각의 행에 존재하는 모든 열(cell)을 순회한다.
                     Iterator<Cell> cellIterator = row.cellIterator();
-                    int cellCnt = 0; //14번째 셀 까지만
-                    while (cellIterator.hasNext() && cellCnt != 14) {
+                    int cellCnt = 0; // 13번째 셀 까지만
+                    while (cellIterator.hasNext() && cellCnt != 13) { // 월 주차 까지만
                         Cell cell = cellIterator.next();
                         if (cellCnt == 0) { //순번 무시
                             cellCnt++;
@@ -145,6 +151,10 @@ public class MainController {
                                 value = value.substring(0, value.length() - 2);
                                 System.out.print("<" + value + ">");
                             }
+                            case BLANK -> {
+                                // rowNum과 cellNum alert 띄어주기
+
+                            }
                         }
                         if(value!=null) {
                             if (value.contains("\n")) {
@@ -154,11 +164,30 @@ public class MainController {
                         value = "\""+value+"\"";
                         if(cellCnt!=13) value+=",";
                         pw.write(value);
+
+                        switch(cellCnt) { // 한줄 정보 담는 객체에 저장
+                            case 1 -> {studentDto.setDate(value);}
+                            case 2 -> {studentDto.setName(value);}
+                            case 3 -> {studentDto.setAttendance(value);}
+                            case 4 -> {studentDto.setAssignment_performance(value);}
+                            case 5 -> {studentDto.setPlanner_performance(value);}
+                            case 6 -> {studentDto.setTest_score(value);}
+                            case 7 -> {studentDto.setAssignment_comment(value);}
+                            case 8 -> {studentDto.setTextbook(value);}
+                            case 9 -> {studentDto.setProgress(value);}
+                            case 10 -> {studentDto.setMonth(value);}
+                            case 11 -> {studentDto.setWeek(value);}
+                        }
+
+
                         cellCnt++;
                     }
                     pw.write("\n");
                     rowCnt++;
+
+                    classData.add(studentDto); // 반 전체 데이터에 한 줄 만큼의 데이터 추가
                 }
+
                 pw.flush(); //flush 안하면 수정 안됨
                 pw.close();
                 file.close();
@@ -171,6 +200,8 @@ public class MainController {
         return "success";
     }
 
+
+
     @GetMapping("/main/successPage")
     public String success(){
         return "successPage";
@@ -181,7 +212,7 @@ public class MainController {
         List<String> name = new ArrayList<String>();
         List<StudentDTO> print = new ArrayList<StudentDTO>();
 
-        List<StudentDTO> student = new CsvToBeanBuilder<StudentDTO>(new FileReader("C:/Users/home/Desktop/SudabangWeb/src/main/resources/static/db/StudentDB.csv"))
+        List<StudentDTO> student = new CsvToBeanBuilder<StudentDTO>(new FileReader("/Users/jeongsangheon/IdeaProjects/SudabangWeb/src/main/resources/static/db/StudentDB.csv"))
                 .withType(StudentDTO.class)
                 .build()
                 .parse();
