@@ -128,7 +128,7 @@ $(document).ready(function(){
             data: formData,
             success: function(msg){
                 status.setProgress(100);
-                // console.log(data);
+                console.log(data);
                 // JSON.parse(data.key);
                 //$("#status1").append("File upload Done<br>");
                 // window.location.assign("http://localhost:8080/main/successPage") -> 업로드 성공하는 순간 페이지 이동

@@ -1,8 +1,10 @@
 package com.example.sudabangweb.dto;
 
+import lombok.Getter;
+
 import java.util.*;
 
-
+@Getter
 public class ClassData {
     private ArrayList<StudentDTO> classList; // 월별 수업 배열(엑셀 전체 데이터)
     private ArrayList<WeekData> weeklyList;// 주차별 수업 배열

@@ -25,6 +25,11 @@ public class MainController {
 
     @GetMapping("/main")
     public String dragAndDrop() {
+        return "main";
+    }
+
+    @GetMapping("/excel")
+    public String uploadExcel(){
         return "mainPage";
     }
 
@@ -43,7 +48,7 @@ public class MainController {
 
         Iterator<String> itr =  multipartRequest.getFileNames();
 
-        String filePath = "/Users/jeongsangheon/IdeaProjects/SudabangWeb/src/main/resources/static/excel";
+        String filePath = "C:/Users/home/Desktop/SudabangWeb/src/main/resources/static/excel";
 
         ArrayList<StudentDTO> classData = new ArrayList<>(); // 반 전체 데이터를 담는 객체
 
@@ -64,7 +69,6 @@ public class MainController {
 
 
 
-
             try {
 
                 //파일 저장
@@ -77,7 +81,7 @@ public class MainController {
                 // ----- 엑셀 파일 분석 후 csv로 저장하기 ----- //
 
                 // 저장할 csv 파일 열기
-                File f = new File("/Users/jeongsangheon/IdeaProjects/SudabangWeb/src/main/resources/static/db/StudentDB.csv");
+                File f = new File("C:/Users/home/Desktop/SudabangWeb/src/main/resources/static/db/StudentDB.csv");
                 System.out.println("파일 존재? : "+f.exists());
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f,true), "UTF-8"));
                 //true를 하지 않으면 파일을 덮어씀
@@ -162,7 +166,7 @@ public class MainController {
                             }
                         }
                         value = "\""+value+"\"";
-                        if(cellCnt!=13) value+=",";
+                        if(cellCnt!=12) value+=",";
                         pw.write(value);
 
                         switch(cellCnt) { // 한줄 정보 담는 객체에 저장
@@ -212,7 +216,7 @@ public class MainController {
         List<String> name = new ArrayList<String>();
         List<StudentDTO> print = new ArrayList<StudentDTO>();
 
-        List<StudentDTO> student = new CsvToBeanBuilder<StudentDTO>(new FileReader("/Users/jeongsangheon/IdeaProjects/SudabangWeb/src/main/resources/static/db/StudentDB.csv"))
+        List<StudentDTO> student = new CsvToBeanBuilder<StudentDTO>(new FileReader("C:/Users/home/Desktop/SudabangWeb/src/main/resources/static/db/StudentDB.csv"))
                 .withType(StudentDTO.class)
                 .build()
                 .parse();

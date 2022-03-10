@@ -1,3 +1,83 @@
+
+.bg_wrapper{
+    background-color: rgba(241, 241, 241, 0.575);
+}
+
+.main_bg {
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s;
+    width:100%;
+    max-width: 1600px;
+    min-height:750px;
+    background-image: url("../img/totoro.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+}
+
+.umk_logo{
+    margin:1rem;
+    width:10rem;
+    min-height:10rem;
+    background-image: url('../img/umk.png');
+    background-size: 100% 100%;
+    float:right;
+}
+
+.bg_text_btn {
+    width:33rem;
+    min-height:20rem;
+    clear:right;
+    float:right;
+    margin-top:5rem;
+    margin-right:3.0rem;
+    text-align:center;
+    color:black;
+}
+
+.bg_small_text{
+    letter-spacing:-3px;
+    font-size:2rem;
+}
+
+.bg_big_text{
+    font-size:4rem;
+    width:100%;
+}
+
+.bg_btn{
+    padding-top : 2.5rem;
+}
+
+.bg_btn_style{
+    font-weight:bold;
+    color:white;
+    font-size:1.2rem;
+    border-radius: 3px;
+    border:0;
+    background-color: #313131;
+    width:9rem;
+    height:3.5rem;
+    cursor: pointer;
+}
+
+.bg_btn_style:hover{
+    background-color: white;
+    font-weight: bold;
+    color:black;
+}
+
+@keyframes fadein {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from { opacity:0;}
+    to {opacity:1;}
+}
+
+
 .dragAndDropDiv {
     height: 400px;
     border: 1px solid gray;

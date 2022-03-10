@@ -46,10 +46,10 @@ public class StudentDTO {
     @CsvBindByName(column = "주")
     private String week;
 
-    @CsvBindByName(column = "테스트점수")
+
     private String[] test_scores;
 
-    @CsvBindByName(column = "테스트평균점수")
+
     private String test_average;
 
     // 클리닉도 여기서 한꺼번에 처리
